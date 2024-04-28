@@ -1,0 +1,36 @@
+/ Pin connections
+const int sensorPin = A0;  // MQ2 sensor analog pin
+const int ledPin = 13;    // LED pin
+
+// Threshold for smoke detection
+const int smokeThreshold = 350;  // Adjust this value according to your sensor's sensitivity
+
+void setup() {
+  // Initialize serial communication
+  Serial.begin(9600);
+  
+  // Set LED pin as output
+  pinMode(ledPin, OUTPUT);
+}
+
+void loop() {
+  // Read the sensor value
+  int sensorValue = analogRead(sensorPin);
+
+  // Print the sensor value (optional)
+  Serial.println(sensorValue);
+  
+  // Check if smoke is detected
+  if (sensorValue > smokeThreshold) {
+    // Smoke detected, turn on the LED
+    digitalWrite(ledPin, HIGH);
+    Serial.println("Smoke detected!");
+  } else {
+    // No smoke detected, turn off the LED
+    digitalWrite(ledPin, LOW);
+    Serial.println("No smoke detected.");
+  }
+
+  // Delay before the next reading
+  delay(1000);
+}
